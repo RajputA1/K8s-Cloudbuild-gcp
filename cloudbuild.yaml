@@ -1,47 +1,15 @@
-
-
 steps:
-
-
- # build the container image
-
-
+  # build the container image
 - name: "gcr.io/cloud-builders/docker"
-   
   args: ["build", "-t", "gcr.io/the-current-project/nginx:v1", "."]
-
-
- # push container image
-
-
+  # push container image
 - name: "gcr.io/cloud-builders/docker"
-
-
- args: ["push", "gcr.io/the-current-project/nginx:v1"]
-
-
- # deploy container image to GKE
-
-
+  args: ["push", "gcr.io/the-current-project/nginx:v1"]
+  # deploy container image to GKE
 - name: "gcr.io/cloud-builders/gke-deploy"
-
-
- args:
-
-
- - run
-
-
- - --filename=k8s/
-
-
- - --image=gcr.io/the-current-project/nginx:v1
-
-
- - --location=us-central1-a
-
-
- - --cluster=new-cluster-1
-
-
-
+  args:
+  - run
+  - --filename=k8s/
+  - --image=gcr.io/the-current-project/nginx:v1
+  - --location=us-central1-a
+  - --cluster=new-cluster-1
